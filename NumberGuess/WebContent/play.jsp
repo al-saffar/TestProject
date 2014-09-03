@@ -70,24 +70,30 @@ body {
 			<p>Welcome...</p>
 			<div id="level">
 				Easy Medium Hard <input type="range" name="level" min="10" max="100"
-					step="10" value="50">
+					step="10" value="50" oninput=showVal(this.value);>
+				<div id="showLevelValue"></div>
 			</div>
-			<p>
-			
-				<br> <a class="btn btn-primary btn-lg" role="button"
-					onclick=displayPopUp();> Generate Random number! &raquo;</a>
-			
-			</p>
+			<div id="genBtn">
+				<p>
+
+					<br> <a class="btn btn-primary btn-lg" role="button"
+						onclick=generateNum();> Generate Random number! &raquo;</a>
+			</div>
+
+			<div id="hiddenNumb"></div>
+
 			<div class="form-group">
 				<input type="text" placeholder="00" class="form-control">
 			</div>
 
 			<button type="submit" class="btn btn-success">Guess!</button>
 		</div>
-
+		<div id="hiddenNumb"></div>
 	</div>
 
+
 	<div class="container">
+
 
 
 		<!-- Example row of columns -->
@@ -178,7 +184,31 @@ body {
 			document.getElementById("fade").style.display = "none";
 
 		}
+			
+		function generateNum(){
+			
+			var randomnumber=Math.floor(Math.random()*100);
+			
+			 document.getElementById("hiddenNumb").innerHTML=randomnumber;
+			 
+			 
+	    }
+		
+				
+		function getLevel() {
+		    var selLevel = document.getElementById("level").value;
+		    alert(input);
+		}
+		function showVal(newVal){
+			  document.getElementById("showLevelValue").innerHTML=newVal;
+			}
 	</script>
+	
+		<script>
+		var v="Roseindia"; 
+		</script> 
+		<% String st="<script>document.writeln(v)</script>";
+		out.println("value="+st); %>
 </body>
 </html>
 

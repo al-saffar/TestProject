@@ -122,7 +122,7 @@ body {
 
 				<br> <input class="btn btn-success" type="submit" name="button"
 					value="Create user"> <input class="btn btn-default"
-					style="margin-left: 0px" type="button" name="button" value="Luk"
+					style="margin-left: 0px" type="button" name="button" value="Close"
 					onClick="closePopUp()">
 			</div>
 
@@ -215,8 +215,9 @@ body {
 		function closePopUp() {
 			document.getElementById("createUser").style.display = "none";
 			document.getElementById("fade").style.display = "none";
-
 		}
+		
+		
 	</script>
 </body>
 </html>

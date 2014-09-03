@@ -9,11 +9,10 @@
 	margin-right: 75%;
 	position: absolute;
 	z-index: 501;
-	width: 390px;
+	width: 440px;
 	height: 280px;
 	background-color: #ffffff;
 	display: none;
-	
 }
 
 #fade {
@@ -41,12 +40,55 @@
 	z-index: 500;
 }
 
-#level{
-	
+#level {
 	top: 30%;
 	width: 390px;
-	height: 20px;
-	
-	
-	
+	height: 30px;
 }
+
+#showLevelValue {
+	float: right;
+	width: 20px;
+}
+#hiddenNumb {
+	margin-top: auto;
+	margin-left: 25%;
+	margin-right: 75%;
+	width: 10px;
+	height: 10px;
+}
+#genBtn {
+	
+	width: 320px;
+}
+.loading{
+	width:100px;
+	height:100px;
+	margin:30px auto;
+	position:relative;
+}
+.loading.bar div{
+	width: 10px;
+	height: 30px;
+	background: black;
+	position: absolute;
+	top: 35px;
+	left: 45px;
+	opacity:0.05;
+
+	-webkit-animation: fadeit 1.1s linear infinite;
+	animation: fadeit 1.1s linear infinite;
+}
+.loading.bar div{
+	width: 10px;
+	height: 30px;
+	background: black;
+	position: absolute;
+	top: 35px;
+	left: 45px;
+	opacity:0.05;
+
+	-webkit-animation: fadeit 1.1s linear infinite;
+	animation: fadeit 1.1s linear infinite;
+}
+
