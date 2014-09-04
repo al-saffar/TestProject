@@ -81,7 +81,7 @@ body {
 			</div>
 
 			<div id="hiddenNumb"></div>
-
+	
 			<div class="form-group">
 				<input type="text" placeholder="00" class="form-control">
 			</div>
@@ -204,11 +204,7 @@ body {
 			}
 	</script>
 	
-		<script>
-		var v="Roseindia"; 
-		</script> 
-		<% String st="<script>document.writeln(v)</script>";
-		out.println("value="+st); %>
+		
 </body>
 </html>
 

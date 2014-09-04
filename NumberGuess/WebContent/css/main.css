@@ -61,34 +61,10 @@
 	
 	width: 320px;
 }
-.loading{
-	width:100px;
-	height:100px;
-	margin:30px auto;
-	position:relative;
-}
-.loading.bar div{
-	width: 10px;
-	height: 30px;
-	background: black;
-	position: absolute;
-	top: 35px;
-	left: 45px;
-	opacity:0.05;
 
-	-webkit-animation: fadeit 1.1s linear infinite;
-	animation: fadeit 1.1s linear infinite;
-}
-.loading.bar div{
-	width: 10px;
-	height: 30px;
-	background: black;
-	position: absolute;
-	top: 35px;
-	left: 45px;
-	opacity:0.05;
+#image {
+	width: 50px;
+	height: 50px;
+   image:src(WebContent/img/correctmark.png);
 
-	-webkit-animation: fadeit 1.1s linear infinite;
-	animation: fadeit 1.1s linear infinite;
-}
-
+}​

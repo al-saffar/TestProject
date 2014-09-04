@@ -1,6 +1,5 @@
 package classes;
 
-
 import classes.User;
 import java.util.HashMap;
 import java.util.List;
@@ -11,50 +10,46 @@ import java.util.logging.Logger;
 
 public class UserCheck {
 
-    HashMap<String, String> userTable;
-    
-    public UserCheck() {
-        userTable = new HashMap<String, String>();
-      
-        init2();
-        
-    }
+	HashMap<String, String> userTable;
 
-    public void addUser(String name, String code) {
-        if (!userTable.containsKey(name)) {
-            userTable.put(name, code);
-        } else {
-            System.out.println("User: " + name + " exists in DB");
-        }
+	public UserCheck() {
+		userTable = new HashMap<String, String>();
 
-    }
+		init2();
 
-    public Boolean userExists(String name, String code) {
-        Boolean found = false;
-        if (userTable.containsKey(name)) {
-            if (code.equals(userTable.get(name))) {
-                found = true;
-            }
-            
-        }
-        return found;
-        
-    }
+	}
 
-//    public void init() {
-//        addUser("Admin", "giveaccess");
-//       
-//    }
-    
-     public void init2() {
-        database.MySQLConnector.openConnection();
-          
-            List<Users> sus = Data.getUsers();
+	public void addUser(String name, String code) {
+		if (!userTable.containsKey(name)) {
+			userTable.put(name, code);
+		} else {
+			System.out.println("User: " + name + " exists in DB");
+		}
 
-               for (Users su : sus) {
-                   addUser(su.getInitial(), su.getPassword());
-                   
-               }
-       
-    }
+	}
+
+	public Boolean userExists(String name, String code) {
+		Boolean found = false;
+		if (userTable.containsKey(name)) {
+			if (code.equals(userTable.get(name))) {
+				found = true;
+			}
+
+		}
+		return found;
+
+	}
+
+	
+	public void init2() {
+		database.DatabaseCon.openConnection();
+
+		List<User> sus = Data.getUsers();
+
+		for (User su : sus) {
+			addUser(su.getUsername(), su.getPassword());
+
+		}
+
+	}
 }

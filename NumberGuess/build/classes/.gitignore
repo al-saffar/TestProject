@@ -1,2 +1,6 @@
-/servlets/
 /classes/
+/controller/
+/database/
+/mapper/
+/servlets/
+/unitTest/
