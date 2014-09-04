@@ -68,35 +68,46 @@ body {
 		<div class="container">
 
 			<p>Welcome...</p>
-			<div id="level">
-				Easy Medium Hard <input type="range" name="level" min="10" max="100"
-					step="10" value="50" oninput=showVal(this.value);>
-				<div id="showLevelValue"></div>
-			</div>
-			<p>
-			<div>
-				<div id="genBtn">
+			<br>
+			<form name="StartGameServlet" method="post" action="StartGameServlet">
+				<div id="level">
+					<h4>Easy &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Medium
+						&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Hard</h4>
+					<input type="range" name="level" min="10" max="100" step="10"
+						value="<%=session.getAttribute("selLevel")%>"
+						oninput=showVal(this.value);>
+					<%
+						if (session.getAttribute("selLevel") == null) {
+							session.setAttribute("selLevel", "50");
+						}
+					%>
 
-					<form name="StartGameServlet" method="post"
-						action="StartGameServlet">
-						<br> <input class="btn btn-primary btn-lg" type="submit"
-							name="genButton" value="Generate Random
-						number!"
-							onclick=generateNum();> </input>
-					</form>
+					<div id="showLevelValue"><%=session.getAttribute("selLevel")%></div>
+					
 				</div>
 				<p>
-			</div>
+				<div>
+				<br>
+					<div id="genBtn">
 
-			<div id="hiddenNumb"></div>
-
-			<div class="form-group">
-				<input type="text" placeholder="00" class="form-control">
-			</div>
-
-			<button type="submit" class="btn btn-success">Guess!</button>
+						<br> <input class="btn btn-primary btn-lg" type="submit"
+							name="genButton" value="Generate Random	number!"
+							onclick=generateNum();> </input>
+					</div>
+			</form>
+			<p>
 		</div>
+
 		<div id="hiddenNumb"></div>
+
+		<div class="form-group">
+			<input type="text" placeholder="00" class="form-control"
+				maxlength="3" minlenght="1">
+		</div>
+
+		<button type="submit" class="btn btn-success">Guess!</button>
+	</div>
+	<div id="hiddenNumb"></div>
 	</div>
 
 

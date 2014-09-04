@@ -78,13 +78,14 @@ body {
 	</div>
 
 	<div class="container">
+		<form name="CreateUserServlet" method="post"
+			action="CreateUserServlet">
+			<div id="createUser">
+				<h3 style="text-align: center">Create User</h3>
+				<div style="float: left; margin-left: 25px;">
+					<br>
 
-		<div id="createUser">
-			<h3 style="text-align: center">Create User</h3>
-			<div style="float: left; margin-left: 25px;">
-				<br>
 
-				<form action="CreateUserServlet" method="post">
 					<table>
 						<tbody>
 							<tr>
@@ -104,73 +105,68 @@ body {
 							<tr>
 								<td><input class="form-control" type="text" name="username"
 									placeholder="Type username"></td>
-								<td><input class="form-control" type="text" name="password"
+								<td><input class="form-control" type="text" name="pw"
 									placeholder="Type password"></td>
 							</tr>
 
 
 						</tbody>
 					</table>
+				</div>
+				<br>
 
-				</form>
+				<div style="float: right; margin-right: 20px;">
 
+					<br> <input class="btn btn-success" type="submit"
+						name="button" value="Create user"> <input
+						class="btn btn-default" style="margin-left: 0px" type="button"
+						name="button" value="Close" onClick="closePopUp()">
+				</div>
+		</form>
 
-			</div>
-			<br>
-
-			<div style="float: right; margin-right: 20px;">
-
-				<br> <input class="btn btn-success" type="submit" name="button"
-					value="Create user"> <input class="btn btn-default"
-					style="margin-left: 0px" type="button" name="button" value="Close"
-					onClick="closePopUp()">
-			</div>
-
-
-
+	</div>
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="col-md-4">
+			<h2>1.</h2>
+			<p>Donec id elit non mi porta gravida at eget metus. Fusce
+				dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+				ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+				magna mollis euismod. Donec sed odio dui.</p>
+			<p>
+				<a class="btn btn-default" href="#" role="button">View details
+					&raquo;</a>
+			</p>
 		</div>
-		<!-- Example row of columns -->
-		<div class="row">
-			<div class="col-md-4">
-				<h2>1.</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce
-					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-					magna mollis euismod. Donec sed odio dui.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
-			<div class="col-md-4">
-				<h2>2.</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce
-					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-					magna mollis euismod. Donec sed odio dui.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
-			<div class="col-md-4">
-				<h2>3.</h2>
-				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
-					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-					nibh, ut fermentum massa justo sit amet risus.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
+		<div class="col-md-4">
+			<h2>2.</h2>
+			<p>Donec id elit non mi porta gravida at eget metus. Fusce
+				dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+				ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+				magna mollis euismod. Donec sed odio dui.</p>
+			<p>
+				<a class="btn btn-default" href="#" role="button">View details
+					&raquo;</a>
+			</p>
 		</div>
+		<div class="col-md-4">
+			<h2>3.</h2>
+			<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
+				egestas eget quam. Vestibulum id ligula porta felis euismod semper.
+				Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
+				nibh, ut fermentum massa justo sit amet risus.</p>
+			<p>
+				<a class="btn btn-default" href="#" role="button">View details
+					&raquo;</a>
+			</p>
+		</div>
+	</div>
 
-		<hr>
+	<hr>
 
-		<footer>
-		<p>&copy; Company 2014</p>
-		</footer>
+	<footer>
+	<p>&copy; Company 2014</p>
+	</footer>
 
 	</div>
 
@@ -216,11 +212,7 @@ body {
 			document.getElementById("createUser").style.display = "none";
 			document.getElementById("fade").style.display = "none";
 		}
-		<%
-		
-		<%out.println((String)session.getAttribute("loggedIn"));%>
-		
-		%>
+		<%out.println((String) session.getAttribute("skrivnoget"));%>
 		
 	</script>
 </body>
