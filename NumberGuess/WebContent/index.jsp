@@ -216,7 +216,11 @@ body {
 			document.getElementById("createUser").style.display = "none";
 			document.getElementById("fade").style.display = "none";
 		}
+		<%
 		
+		<%out.println((String)session.getAttribute("loggedIn"));%>
+		
+		%>
 		
 	</script>
 </body>

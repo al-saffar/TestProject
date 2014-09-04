@@ -73,15 +73,23 @@ body {
 					step="10" value="50" oninput=showVal(this.value);>
 				<div id="showLevelValue"></div>
 			</div>
-			<div id="genBtn">
-				<p>
+			<p>
+			<div>
+				<div id="genBtn">
 
-					<br> <a class="btn btn-primary btn-lg" role="button"
-						onclick=generateNum();> Generate Random number! &raquo;</a>
+					<form name="StartGameServlet" method="post"
+						action="StartGameServlet">
+						<br> <input class="btn btn-primary btn-lg" type="submit"
+							name="genButton" value="Generate Random
+						number!"
+							onclick=generateNum();> </input>
+					</form>
+				</div>
+				<p>
 			</div>
 
 			<div id="hiddenNumb"></div>
-	
+
 			<div class="form-group">
 				<input type="text" placeholder="00" class="form-control">
 			</div>
@@ -203,8 +211,8 @@ body {
 			  document.getElementById("showLevelValue").innerHTML=newVal;
 			}
 	</script>
-	
-		
+
+
 </body>
 </html>
 
