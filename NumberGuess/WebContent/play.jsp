@@ -87,31 +87,31 @@ body {
 
 				</div>
 				<p>
-				
-					<br>
-					<div id="genBtn">
 
-						<br> <input class="btn btn-primary btn-lg" type="submit"
-							name="genButton" value="Generate Random	number!"
-							onclick=generateNum();> </input>
-					</div>
-					<div class="image">
-							<img alt="" src="img/correctmark.png">
-						</div>
+					<br>
+				<div id="genBtn">
+
+					<br> <input class="btn btn-primary btn-lg" type="submit"
+						name="genButton" value="Generate Random	number!"
+						onclick=generateNum();> </input>
+				</div>
+				<div id="image">
+					<img alt="" src="img/correctmark.png">
+				</div>
 			</form>
 			<p>
-	
-		<div id="hiddenNumb"></div>
-<br><br><br><br><br>
-		<div class="form-group">
-			<input type="text" placeholder="00" class="form-control"
-				maxlength="3" minlenght="1">
-		</div>
+			<div id="hiddenNumb"></div>
+			<br> <br> <br> <br> <br>
+			<div class="form-group">
+				<input type="text" name="guessedNumb" placeholder="00"
+					id="guessedNumb" class="form-control" maxlength="3" minlenght="1"
+					onclick=checkNumb(this.value); >
+			</div>
 
-		<button type="submit" class="btn btn-success">Guess!</button>
-	</div>
-	<div id="hiddenNumb"></div>
-	
+			<button type="button" onclick=checkNumb(this.value); class="btn btn-success">Guess!</button>
+		</div>
+		<div id="msg"></div>
+
 	</div>
 
 	<div class="container">
@@ -209,13 +209,27 @@ body {
 			
 		function generateNum(){
 			
-			var randomnumber=Math.floor(Math.random()*100);
-			
-			 document.getElementById("hiddenNumb").innerHTML=randomnumber;
-			 
+			document.getElementById("image").style.display = "block";
+			document.getElementById("guessedNumb").focus();
 			 
 	    }
 		
+		function checkNumb(val){
+			
+			var selval = val;
+			var randomNumb = <%=session.getAttribute("randomNumb")%>;
+			
+			
+			if (selval == randomNumb){
+				document.getElementById("msg").innerHTML="Correct";
+			}
+			else if(selval < randomNumb){
+				document.getElementById("msg").innerHTML="Too Small";
+			}
+			else if(selval > randomNumb){
+				document.getElementById("msg").innerHTML="Too High";
+			}
+			}
 				
 		function getLevel() {
 		    var selLevel = document.getElementById("level").value;
@@ -223,7 +237,7 @@ body {
 		}
 		function showVal(newVal){
 			  document.getElementById("showLevelValue").innerHTML=newVal;
-			}
+		}
 	</script>
 
 

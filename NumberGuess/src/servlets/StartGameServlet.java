@@ -41,8 +41,10 @@ public class StartGameServlet extends HttpServlet {
 		System.out.println("level: " + level);
 		System.out.println("randomNumber: " + ranNum);
 
-		session.setAttribute("selLevel", level);
 		session.setAttribute("randomNumb", ranNum);
+		session.setAttribute("selLevel", level);
+		System.out.println("TEST!!! "+session.getAttribute("randomNumb"));
+		
 
 		response.sendRedirect("play.jsp");
 

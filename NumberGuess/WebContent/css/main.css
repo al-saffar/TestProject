@@ -58,19 +58,26 @@
 	height: 10px;
 }
 #genBtn {
-		border-style: solid;
-    border-color: #ff0000 #0000ff;
+		
 	width: 280px;
 	height: 80px;
 	float:left; /* add this */
 }
 
-.image {
-		border-style: solid;
-    border-color: #ff0000 #0000ff;
+#image {
+		
 	width: 60px;
 	height: 60px;
 	 float:left; /* add this */
+	 display: none;
 	
    
+}
+
+#msg{
+	margin-top: auto;
+	margin-left: 25%;
+	margin-right: 75%;
+	width: 100px;
+	height: 10px;
 }​
