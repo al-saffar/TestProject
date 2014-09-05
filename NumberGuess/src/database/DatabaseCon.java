@@ -29,12 +29,24 @@ public class DatabaseCon {
 		}
 
 	}
+	
+	public static void closeConnection()
+	{
+		try {
+			connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 	public static PreparedStatement getStatement(String sql) {
 
 		PreparedStatement result = null;
 		try {
 			result = connect.prepareStatement(sql);
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(DatabaseCon.class.getName()).log(Level.SEVERE,
 					null, ex);
@@ -42,5 +54,4 @@ public class DatabaseCon {
 
 		return result;
 	}
-
 }

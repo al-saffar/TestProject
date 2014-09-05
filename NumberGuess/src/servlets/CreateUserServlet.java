@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mapper.SQLmapper;
 import classes.User;
 import database.DatabaseCon;
 
@@ -35,10 +36,6 @@ public class CreateUserServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
-		DatabaseCon dc = new DatabaseCon();
-		
-		dc.openConnection();
 		
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
@@ -47,10 +44,16 @@ public class CreateUserServlet extends HttpServlet {
 		
 		
 		User user = new User();
-		user.setFirstname(firstname);
-		user.setLastname(lastname);
-		user.setUsername(username);
-		user.setPassword(pw);
+		if(user.setFirstname(firstname))
+		{
+			user.setFirstname(firstname);
+			user.setLastname(lastname);
+			user.setUsername(username);
+			user.setPassword(pw);
+			
+			SQLmapper.saveUser(user);
+		}
+		
 		
 		System.out.println(user.getFirstname().toString());
 		System.out.println(user.getLastname().toString());
