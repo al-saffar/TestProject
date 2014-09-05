@@ -79,25 +79,30 @@ body {
 					<%
 						if (session.getAttribute("selLevel") == null) {
 							session.setAttribute("selLevel", "50");
+
 						}
 					%>
 
 					<div id="showLevelValue"><%=session.getAttribute("selLevel")%></div>
-					
+
 				</div>
 				<p>
 				<div>
-				<br>
+					<br>
 					<div id="genBtn">
 
 						<br> <input class="btn btn-primary btn-lg" type="submit"
 							name="genButton" value="Generate Random	number!"
 							onclick=generateNum();> </input>
 					</div>
+					<div class="image">
+			<img alt="" src="img/correctmark.png">
+			</div>
 			</form>
 			<p>
+		
+		
 		</div>
-
 		<div id="hiddenNumb"></div>
 
 		<div class="form-group">

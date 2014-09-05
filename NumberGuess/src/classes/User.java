@@ -6,9 +6,9 @@ public class User {
 	private String lastname;
 	private String username;
 	private String password;
-	
-	public User(){
-		
+
+	public User() {
+
 	}
 
 	public User(String firstname, String lastname, String username,
@@ -24,8 +24,13 @@ public class User {
 		return firstname;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public boolean setFirstname(String firstname) {
+		if (firstname.matches("[a-zA-Z]{1,20}")) { // bogstav fra "a til z og mellem 3 og 10 i længden.
+			this.firstname = firstname;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public String getLastname() {
