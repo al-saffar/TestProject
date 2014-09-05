@@ -87,7 +87,7 @@ body {
 
 				</div>
 				<p>
-				<div>
+				
 					<br>
 					<div id="genBtn">
 
@@ -96,13 +96,11 @@ body {
 							onclick=generateNum();> </input>
 					</div>
 					<div class="image">
-			<img alt="" src="img/correctmark.png">
-			</div>
+							<img alt="" src="img/correctmark.png">
+						</div>
 			</form>
 			<p>
-		
-		
-		</div>
+	
 		<div id="hiddenNumb"></div>
 
 		<div class="form-group">
@@ -113,8 +111,8 @@ body {
 		<button type="submit" class="btn btn-success">Guess!</button>
 	</div>
 	<div id="hiddenNumb"></div>
+	
 	</div>
-
 
 	<div class="container">
 
