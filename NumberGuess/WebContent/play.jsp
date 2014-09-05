@@ -102,7 +102,7 @@ body {
 			<p>
 	
 		<div id="hiddenNumb"></div>
-
+<br><br><br><br><br>
 		<div class="form-group">
 			<input type="text" placeholder="00" class="form-control"
 				maxlength="3" minlenght="1">
