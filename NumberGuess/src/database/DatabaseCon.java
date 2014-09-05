@@ -17,8 +17,8 @@ public class DatabaseCon {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String connectionUrl = "jdbc:mysql://localhost/DatabaseNameHere?"
-					+ "user=root&password=&autoReconnect=true";
+			String connectionUrl = "jdbc:mysql://mysql22.unoeuro.com/karanlikvadigames_com_db?"
+					+ "user=karanlikva_com&password=04640464&autoReconnect=true";
 			connect = DriverManager.getConnection(connectionUrl);
 			System.out.println("++++++++++Connection established!++++++++++");
 

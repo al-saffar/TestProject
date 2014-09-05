@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import classes.User;
+import database.DatabaseCon;
 
 /**
  * Servlet implementation class CreateUserServlet
@@ -35,6 +36,10 @@ public class CreateUserServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
+		DatabaseCon dc = new DatabaseCon();
+		
+		dc.openConnection();
+		
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
 		String username = request.getParameter("username");
