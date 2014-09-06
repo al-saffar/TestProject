@@ -66,7 +66,9 @@ body {
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron">
+		
 		<div class="container">
+			<div id="infoBox" style="color:green;"></div>
 			<h1>Welcome to NumberGuess!</h1>
 			<p>Here you can play a Random number guess game and challenge
 				your friends :)</p>
@@ -84,8 +86,6 @@ body {
 				<h3 style="text-align: center">Create User</h3>
 				<div style="float: left; margin-left: 25px;">
 					<br>
-
-
 					<table>
 						<tbody>
 							<tr>
@@ -94,9 +94,9 @@ body {
 							</tr>
 							<tr>
 								<td><input class="form-control" type="text"
-									name="firstname" placeholder="Type firstname"></td>
+									name="firstname" placeholder="Type firstname" value="<%if(request.getParameter("f") != null) out.println(request.getParameter("f")); %>"></td>
 								<td><input class="form-control" type="text" name="lastname"
-									placeholder="Type lastname"></td>
+									placeholder="Type lastname" value="<%if(request.getParameter("l") != null) out.println(request.getParameter("l")); %>"></td>
 							</tr>
 							<tr>
 								<th>* Username:</th>
@@ -104,12 +104,10 @@ body {
 							</tr>
 							<tr>
 								<td><input class="form-control" type="text" name="username"
-									placeholder="Type username"></td>
+									placeholder="Type username" value="<%if(request.getParameter("u") != null && !request.getParameter("err").equals("user")) out.println(request.getParameter("u")); %>"></td>
 								<td><input class="form-control" type="text" name="pw"
 									placeholder="Type password"></td>
 							</tr>
-
-
 						</tbody>
 					</table>
 				</div>
@@ -123,7 +121,6 @@ body {
 						name="button" value="Close" onClick="closePopUp()">
 				</div>
 		</form>
-
 	</div>
 	<!-- Example row of columns -->
 	<div class="row">
@@ -169,10 +166,6 @@ body {
 	</footer>
 
 	</div>
-
-
-
-
 	<!-- /container -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
 	<script>
@@ -212,9 +205,63 @@ body {
 			document.getElementById("createUser").style.display = "none";
 			document.getElementById("fade").style.display = "none";
 		}
+		function showInfoBox(info)
+		{
+			document.getElementById("infoBox").innerHTML = info;
+		}
 		<%out.println((String) session.getAttribute("skrivnoget"));%>
 		
 	</script>
+	
+	<% 
+		try{
+			String success = "";
+			success = request.getParameter("success");
+			if(success.equals("true"))
+			{
+				System.out.println("success");
+				%>
+				<script type="text/javascript">
+				window.onload = showInfoBox("<p>User successfully created!</p>")();
+				</script>
+				<%
+			}
+			else
+			{
+				String errType = "";
+				errType = request.getParameter("err");
+				
+				%>
+				<script type="text/javascript">
+				window.onload = displayPopUp();
+				</script>
+				<%
+				
+				if(errType.equals("user"))
+				{
+					%>
+					<script type="text/javascript">
+					alert("This username is already taken. \nTry another one...");
+					</script>
+					<%
+				}
+				else if(errType.equals("length"))
+				{
+					%>
+					<script type="text/javascript">
+					alert("Please fill all fields. \nFirstname needs to be 2-20 letters.\nLastname needs to be 2-20 letters.\nUsername needs to be 3-20 letters.\nPassword needs to be 6-20 chars.");
+					</script>
+					<%
+				}
+			}
+			
+		}
+		catch(Exception ex)
+		{
+			System.out.print("no param");
+		}
+	
+	%>
 </body>
 </html>
 

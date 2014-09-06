@@ -1,6 +1,9 @@
 package mapper;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import classes.User;
 import database.DatabaseCon;
@@ -35,9 +38,44 @@ public class SQLmapper {
 			
 			DatabaseCon.closeConnection();
 			return true;
-		} catch (Exception e) {
-			System.out.println("error: " +e);
+		} catch (Exception ex) {
+			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
+		}
+	}
+	
+	public static boolean isThisUsernameTaken(String username)
+	{
+		try {
+			DatabaseCon.openConnection();
+			
+			String queryCheck = "SELECT count(*) FROM `okul_guess_users` WHERE `username` = ?";
+			PreparedStatement query = DatabaseCon.getStatement(queryCheck);
+			query.setString(1, username);
+			
+			ResultSet result = query.executeQuery();
+			
+			if(result.next()) {
+			    final int count = result.getInt(1);
+			    if(count > 0)
+			    {
+			    	DatabaseCon.closeConnection();
+			    	return true;
+			    }
+			    else
+			    {
+			    	DatabaseCon.closeConnection();
+			    	return false;
+			    }
+			}
+			else
+			{
+				DatabaseCon.closeConnection();
+				return true;
+			}
+		} catch (Exception ex) {
+			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null, ex);
+			return true;
 		}
 	}
 }

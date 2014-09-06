@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.Out;
+
 import mapper.SQLmapper;
 import classes.User;
 import database.DatabaseCon;
@@ -44,22 +46,31 @@ public class CreateUserServlet extends HttpServlet {
 		
 		
 		User user = new User();
-		if(user.setFirstname(firstname))
+		if(!SQLmapper.isThisUsernameTaken(username) && user.setFirstname(firstname) && user.setLastname(lastname) && user.setUsername(username)&&user.setPassword(pw))
 		{
 			user.setFirstname(firstname);
 			user.setLastname(lastname);
 			user.setUsername(username);
 			user.setPassword(pw);
 			
+			System.out.println(user.getFirstname().toString());
+			System.out.println(user.getLastname().toString());
+			
 			SQLmapper.saveUser(user);
+			
+			response.sendRedirect("index.jsp?success=true");
 		}
-		
-		
-		System.out.println(user.getFirstname().toString());
-		System.out.println(user.getLastname().toString());
-		
-		response.sendRedirect("index.jsp");
-
+		else
+		{
+			if(SQLmapper.isThisUsernameTaken(username))
+			{
+				response.sendRedirect("index.jsp?success=false&err=user&f="+firstname+"&l="+lastname+"&u="+username+"");
+			}
+			else
+			{
+				response.sendRedirect("index.jsp?success=false&err=length&f="+firstname+"&l="+lastname+"&u="+username+"");
+			}
+		}
 	}
 
 }

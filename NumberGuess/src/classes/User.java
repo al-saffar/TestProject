@@ -25,7 +25,7 @@ public class User {
 	}
 
 	public boolean setFirstname(String firstname) {
-		if (firstname.matches("[a-zA-Z]{1,20}")) { // bogstav fra "a til z og mellem 3 og 10 i længden.
+		if (firstname.matches("[a-zA-Z]{2,20}")) { // bogstav fra "a til z og mellem 3 og 10 i længden.
 			this.firstname = firstname;
 			return true;
 		} else {
@@ -37,24 +37,39 @@ public class User {
 		return lastname;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public boolean setLastname(String lastname) {
+		if (lastname.matches("[a-zA-Z]{2,20}")) { // bogstav fra "a til z og mellem 3 og 10 i længden.
+			this.lastname = lastname;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public boolean setUsername(String username) {
+		if (username.matches("[a-zA-Z]{3,20}")) { // bogstav fra "a til z og mellem 3 og 10 i længden.
+			this.username = username;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public boolean setPassword(String password) {
+		if (password.matches("[a-zA-Z0-9]{6,20}")) { // bogstav fra "a til z eller fra 0 til 9 og mellem 3 og 10 i længden.
+			this.password = password;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
