@@ -44,12 +44,15 @@
 	top: 30%;
 	width: 390px;
 	height: 30px;
+	float: left; /* add this */
 }
 
 #showLevelValue {
-	float: right;
+	margin-right:10px;
 	width: 20px;
+	float: right; /* add this */
 }
+
 #hiddenNumb {
 	margin-top: auto;
 	margin-left: 25%;
@@ -57,27 +60,77 @@
 	width: 10px;
 	height: 10px;
 }
+
 #genBtn {
-		
 	width: 280px;
 	height: 80px;
-	float:left; /* add this */
+	float: left; /* add this */
 }
 
 #image {
-		
+	margin-top:20px;
 	width: 60px;
 	height: 60px;
-	 float:left; /* add this */
-	 display: none;
-	
-   
+	float: left; /* add this */
+	display: none;
 }
 
-#msg{
+#msg {
 	margin-top: auto;
 	margin-left: 25%;
 	margin-right: 75%;
 	width: 100px;
 	height: 10px;
-}​
+}
+
+#guessedNumb {
+	font-size: 30px;
+	height: 70px;
+	width: 100px;
+}
+
+input[type='range'] {
+	-webkit-appearance: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 5px #333;
+	background-color: #999;
+	height: 20px;
+	vertical-align: middle;
+}
+
+input[type='range']::-moz-range-track {
+	-moz-appearance: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 5px #333;
+	background-color: #999;
+	height: 10px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none !important;
+	border-radius: 40px;
+	background-color: #FFF;
+	box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.5);
+	border: 1px solid #999;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+	cursor: hand;
+}
+
+input[type='range']::-moz-range-thumb {
+	-moz-appearance: none;
+	border-radius: 40px;
+	background-color: #FFF;
+	box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.5);
+	border: 1px solid #999;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+	cursor: hand;
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+​

@@ -30,6 +30,16 @@ body {
 <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
 </head>
+<%
+	if (session.getAttribute("randomNumb") != null
+			&& session.getAttribute("randomNumb") != "") {
+%>
+<body onload="generateNum()">
+	<%
+		}
+		//out.println(session.getAttribute("randomNumb"));
+	%>
+
 <body>
 
 	<!--[if lt IE 7]>
@@ -73,7 +83,7 @@ body {
 				<div id="level">
 					<h4>Easy &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Medium
 						&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Hard</h4>
-					<input type="range" name="level" min="10" max="100" step="10"
+					<input type="range" name="level" min="10" max="100" step="5"
 						value="<%=session.getAttribute("selLevel")%>"
 						oninput=showVal(this.value);>
 					<%
@@ -83,12 +93,14 @@ body {
 						}
 					%>
 
-					<div id="showLevelValue"><%=session.getAttribute("selLevel")%></div>
-
+					<div id="showLevelValue">
+						<h2><%=session.getAttribute("selLevel")%></h2>
+					</div>
 				</div>
+
 				<p>
 
-					<br>
+					<br> <br> <br>
 				<div id="genBtn">
 
 					<br> <input class="btn btn-primary btn-lg" type="submit"
@@ -103,19 +115,19 @@ body {
 			<div id="hiddenNumb"></div>
 			<br> <br> <br> <br> <br>
 			<div class="form-group">
-				<input type="text" name="guessedNumb" placeholder="00"
+				<input type="text" name="guessedNumb" placeholder="Try a number .."
 					id="guessedNumb" class="form-control" maxlength="3" minlenght="1"
-					onclick=checkNumb(this.value); >
+					onkeypress=checkNumb(this.value); onclick="this.select()">
 			</div>
 
-			<button type="button" onclick=checkNumb(this.value); class="btn btn-success">Guess!</button>
+			<button type="button" onclick=checkNumb(this.value);
+				class="btn btn-success">Guess!</button>
 		</div>
 		<div id="msg"></div>
 
 	</div>
 
 	<div class="container">
-
 
 
 		<!-- Example row of columns -->
@@ -216,27 +228,58 @@ body {
 		
 		function checkNumb(val){
 			
+			
+			var elem = document.getElementById("guessedNumb");
+			elem.onkeyup = function(e){
+			    if(e.keyCode == 13){
+			    	
+			    	if (checkNumb.counter == undefined)
+			    	{
+			    		checkNumb.counter = 0
+			    	}
+			    	
+
+			
 			var selval = val;
 			var randomNumb = <%=session.getAttribute("randomNumb")%>;
+		if	(randomNumb==null||randomNumb==""){
 			
+		}
 			
 			if (selval == randomNumb){
-				document.getElementById("msg").innerHTML="Correct";
+				checkNumb.counter++;
+				document.getElementById("msg").innerHTML="Correct Attemps: "+ checkNumb.counter;
+				document.getElementById("guessedNumb").focus();
+				document.getElementById("guessedNumb").select();
+				// send til servlet/database her
+				<%session.setAttribute("randomNumb", "");%>
+				checkNumb.counter = 0;
 			}
 			else if(selval < randomNumb){
-				document.getElementById("msg").innerHTML="Too Small";
+				checkNumb.counter++;
+				document.getElementById("msg").innerHTML="Too Small Attemps: "+ checkNumb.counter;
+				document.getElementById("guessedNumb").focus();
+				document.getElementById("guessedNumb").select();
+				
 			}
 			else if(selval > randomNumb){
-				document.getElementById("msg").innerHTML="Too High";
-			}
-			}
+				checkNumb.counter++;
+				document.getElementById("msg").innerHTML="Too High Attemps: "+ checkNumb.counter;
+				document.getElementById("guessedNumb").focus();
+				document.getElementById("guessedNumb").select();
 				
+			
+			}
+			}
+			}
+		}
+		
 		function getLevel() {
 		    var selLevel = document.getElementById("level").value;
 		    alert(input);
 		}
 		function showVal(newVal){
-			  document.getElementById("showLevelValue").innerHTML=newVal;
+			  document.getElementById("showLevelValue").innerHTML="<h2>"+newVal+"</h2>";
 		}
 	</script>
 
