@@ -115,7 +115,7 @@ body {
 			<div id="hiddenNumb"></div>
 			<br> <br> <br> <br> <br>
 			<div class="form-group">
-				<input type="text" name="guessedNumb" placeholder="Try a number .."
+				<input type="text" name="guessedNumb" placeholder="00"
 					id="guessedNumb" class="form-control" maxlength="3" minlenght="1"
 					onkeypress=checkNumb(this.value); onclick="this.select()">
 			</div>
@@ -281,6 +281,8 @@ body {
 		function showVal(newVal){
 			  document.getElementById("showLevelValue").innerHTML="<h2>"+newVal+"</h2>";
 		}
+		
+		
 	</script>
 
 
