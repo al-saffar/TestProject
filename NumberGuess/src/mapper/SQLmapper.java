@@ -2,10 +2,13 @@ package mapper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import classes.User;
+import classes.*;
 import database.DatabaseCon;
 
 public class SQLmapper {
@@ -77,5 +80,45 @@ public class SQLmapper {
 			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null, ex);
 			return true;
 		}
+	}
+	
+	public static Score[] gethighscore()
+	{
+		Score[] scores = new Score[1];
+		
+		try {
+			DatabaseCon.openConnection();
+			
+			String sqlStr = "SELECT `username`,`score` FROM `okul_guess_users` ORDER BY score DESC LIMIT 10";
+			PreparedStatement query = DatabaseCon.getStatement(sqlStr);
+			
+			ResultSet result = query.executeQuery();
+			
+			while(result.next())
+			{
+				System.out.println("bef"+scores.length);
+				
+				Score score = new Score(result.getString("username"), result.getInt("score"));
+				
+				System.out.println("af"+scores.length);
+				
+				scores[scores.length-1] = score;
+				
+				System.out.println(score.getUsername());
+				
+				if(scores.length > 0)
+				{
+					scores = Arrays.copyOf(scores, scores.length+1);
+				}
+			}
+			
+			scores = Arrays.copyOf(scores, scores.length-1);
+			
+			DatabaseCon.closeConnection();
+		} catch (Exception ex) {
+			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+		return scores;
 	}
 }
