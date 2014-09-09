@@ -52,25 +52,35 @@ public class UserTest {
 	/**
 	 * Test method for {@link classes.User#getFirstname()}.
 	 */
-	@Test
-	public void testGetFirstname() {
-		System.out.println("getUser");
-		user = new User("Anders", "Al-saffar", "brugernavn", "pw");
-		String expResult = "Anders";
-		String result = user.getFirstname();
-		assertEquals(expResult, result);
+	// @Test
+	// public void testGetFirstname() {
+	// System.out.println("getUser");
+	// user = new User("Anders", "Al-saffar", "brugernavn", "pw");
+	// boolean expResult = true;
+	// boolean result = user.getFirstname();
+	// assertEquals(expResult, result);
 
-	}
+	// }
 
 	/**
 	 * Test method for {@link classes.User#setFirstname(java.lang.String)}.
 	 */
 	@Test
 	public void testSetFirstname() {
+		//new test that should return true, because firstname => 2 
 		System.out.println("setUser");
 		String _firstname = "Anders";
 		user = new User();
-		user.setFirstname(_firstname);
+		boolean expResult = true;
+		boolean result = user.setFirstname(_firstname);
+		assertEquals(expResult, result);
+		
+		//new test that should return false, because firstname < 2 
+		_firstname ="A";
+		boolean expResult1 = false;
+		boolean result1 = user.setFirstname(_firstname);
+		assertEquals(expResult1, result1);
 						
 	}
+
 }

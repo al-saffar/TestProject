@@ -51,7 +51,7 @@ public class User {
 	}
 
 	public boolean setUsername(String username) {
-		if (username.matches("[a-zA-Z]{3,20}")) { // bogstav fra "a til z og mellem 3 og 10 i længden.
+		if (username.matches("[a-zA-Z]{2,20}")) { // bogstav fra "a til z og mellem 2 og 20 i længden.
 			this.username = username;
 			return true;
 		} else {

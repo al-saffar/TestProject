@@ -32,12 +32,13 @@ body {
 </head>
 <%
 	if (session.getAttribute("randomNumb") != null
-			&& session.getAttribute("randomNumb") != "") {
+			&& session.getAttribute("randomNumb") != ""
+			&& session.getAttribute("randomNumb") != null) {
 %>
 <body onload="generateNum()">
 	<%
 		}
-		//out.println(session.getAttribute("randomNumb"));
+		out.println(session.getAttribute("randomNumb"));
 	%>
 
 <body>
@@ -77,6 +78,14 @@ body {
 	<div class="jumbotron">
 		<div class="container">
 
+			<%
+				if (session.getAttribute("selLevel") == null) {
+					session.setAttribute("selLevel", "50");
+
+				}
+			%>
+
+
 			<p>Welcome...</p>
 			<br>
 			<form name="StartGameServlet" method="post" action="StartGameServlet">
@@ -86,15 +95,13 @@ body {
 					<input type="range" name="level" min="10" max="100" step="5"
 						value="<%=session.getAttribute("selLevel")%>"
 						oninput=showVal(this.value);>
-					<%
-						if (session.getAttribute("selLevel") == null) {
-							session.setAttribute("selLevel", "50");
 
-						}
-					%>
 
 					<div id="showLevelValue">
-						<h2><%=session.getAttribute("selLevel")%></h2>
+						<h2>
+							<%=session.getAttribute("selLevel")%>
+						</h2>
+
 					</div>
 				</div>
 
@@ -126,6 +133,8 @@ body {
 		<div id="msg"></div>
 
 	</div>
+
+
 
 	<div class="container">
 
@@ -175,7 +184,26 @@ body {
 
 	</div>
 
+	<div class="container">
+		<form name="playDiv" method="post" action="GameEndedServlet">
+			<div id="createUser">
+				<h3 style="text-align: center">You Guessed Right!</h3>
+				<div style="float: left; margin-left: 25px;">
+					<br>
+					<h3>
+						Correct Number:
+						<%=session.getAttribute("randomNumb")%></h3>
+					<h3>
+						Attemps: cookie??
+						<%=session.getAttribute("randomNumb")%></h3>
+					<h3>Score: ..</h3>
+					<div style="float: right; margin-right: 20px;">
 
+						<input class="btn btn-default" style="margin-left: 0px"
+							type="submit" name="button" value="OK!" onClick="closePopUp()">
+					</div>
+		</form>
+	</div>
 
 
 	<!-- /container -->
@@ -208,6 +236,7 @@ body {
 	</script>
 
 	<script type="text/javascript">
+	
 		function displayPopUp() {
 			document.getElementById("createUser").style.display = "block";
 			document.getElementById("fade").style.display = "block";
@@ -242,17 +271,20 @@ body {
 			
 			var selval = val;
 			var randomNumb = <%=session.getAttribute("randomNumb")%>;
-		if	(randomNumb==null||randomNumb==""){
-			
+			if	(randomNumb==null||randomNumb==""){				
+				alert("Please Generate a new number!");
+				
 		}
 			
-			if (selval == randomNumb){
+			else if (selval == randomNumb){
 				checkNumb.counter++;
 				document.getElementById("msg").innerHTML="Correct Attemps: "+ checkNumb.counter;
 				document.getElementById("guessedNumb").focus();
 				document.getElementById("guessedNumb").select();
 				// send til servlet/database her
-				<%session.setAttribute("randomNumb", "");%>
+				displayPopUp();
+				<%session.setAttribute("randomNumb", null);%>
+				
 				checkNumb.counter = 0;
 			}
 			else if(selval < randomNumb){
