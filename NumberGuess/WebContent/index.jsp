@@ -98,6 +98,7 @@ body {
 								<td><input class="form-control" type="text" name="lastname"
 									placeholder="Type lastname" value="<%if(request.getParameter("l") != null) out.println(request.getParameter("l")); %>"></td>
 							</tr>
+							<br>
 							<tr>
 								<th>* Username:</th>
 								<th>* Password:</th>

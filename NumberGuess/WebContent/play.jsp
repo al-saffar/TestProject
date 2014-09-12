@@ -38,7 +38,7 @@ body {
 <body onload="generateNum()">
 	<%
 		}
-		out.println(session.getAttribute("randomNumb"));
+		//out.println(session.getAttribute("randomNumb"));
 	%>
 
 <body>
@@ -190,18 +190,17 @@ body {
 				<h3 style="text-align: center">You Guessed Right!</h3>
 				<div style="float: left; margin-left: 25px;">
 					<br>
-					<h3>
-						Correct Number:
-						<%=session.getAttribute("randomNumb")%></h3>
-					<h3>
-						Attemps: cookie??
-						<%=session.getAttribute("randomNumb")%></h3>
-					<h3>Score: ..</h3>
-					<div style="float: right; margin-right: 20px;">
+					<h3>Correct Number:	<%=session.getAttribute("randomNumb")%></h3>
+					<h3 id="levelmsg"></h3>
+					<h3 id="attemps"></h3>
+					<h3 id="score"></h3>
+					<div style="float: right; margin-right: 0px;">
 
 						<input class="btn btn-default" style="margin-left: 0px"
-							type="submit" name="button" value="OK!" onClick="closePopUp()">
+							type="submit" id="ok!" name="button" value="OK!" onClick="closePopUp()">
 					</div>
+					<input type="hidden" id="hiddenField" name="hiddenField" />
+					<input type="hidden" id="hiddenScore" name="hiddenScore" /> 
 		</form>
 	</div>
 
@@ -279,11 +278,28 @@ body {
 			else if (selval == randomNumb){
 				checkNumb.counter++;
 				document.getElementById("msg").innerHTML="Correct Attemps: "+ checkNumb.counter;
-				document.getElementById("guessedNumb").focus();
-				document.getElementById("guessedNumb").select();
+				
 				// send til servlet/database her
+				var elem = document.getElementById("hiddenField")
+				var hiddenscore = document.getElementById("hiddenScore")
+				var attemps = document.getElementById("attemps")
+				var msg = document.getElementById("score")
+				var level = <%=session.getAttribute("selLevel")%>
+				var score = 0;		
+				score = (1000* (level/10) )/checkNumb.counter;
+				
+				score +=  (level*10) - (100*checkNumb.counter/10);
+				var levelmsg = document.getElementById("levelmsg")
+				
+				hiddenscore.value = score;
+				elem.value = checkNumb.counter;
+				attemps.innerHTML = "Attemps: "+ checkNumb.counter;
+				levelmsg.innerHTML ="Level: "+ level;
+				msg.innerHTML = "Score: "+ ~~score;
 				displayPopUp();
-				<%session.setAttribute("randomNumb", null);%>
+				document.getElementById("ok!").focus();
+				document.getElementById("ok!").select();
+				
 				
 				checkNumb.counter = 0;
 			}

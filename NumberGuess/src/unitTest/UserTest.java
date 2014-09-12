@@ -67,8 +67,9 @@ public class UserTest {
 	 */
 	@Test
 	public void testSetFirstname() {
-		//new test that should return true, because firstname => 2 
+		
 		System.out.println("setUser");
+		//new test that should return true, because firstname => 2 
 		String _firstname = "Anders";
 		user = new User();
 		boolean expResult = true;
