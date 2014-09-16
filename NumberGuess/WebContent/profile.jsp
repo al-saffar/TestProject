@@ -4,6 +4,22 @@
 <%@page import="classes.Score"%>
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="ISO-8859-1"%>
+	
+<%
+int id = -1;
+try{
+	id = (int)session.getAttribute("userid");
+}
+catch(Exception ex)
+{
+}
+
+
+if(id < 0)
+{
+	response.sendRedirect("index.jsp?success=false&err=login");
+}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -49,16 +65,15 @@ body {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Play Game</a> <a
-					class="navbar-brand" href="#">Inbox</a> <a class="navbar-brand"
-					href="#">Profile</a> <a class="navbar-brand" href="#">Highscore</a>
+				<a class="navbar-brand" href="play.jsp">Play Game</a> <a
+					class="navbar-brand" href="inbox.jsp">Inbox</a> <a class="navbar-brand"
+					href="profile.jsp">Profile</a> <a class="navbar-brand" href="highscore.jsp">Highscore</a>
 
 			</div>
 			<div class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right" role="form"
-					action="index.jsp">
+				<form class="navbar-form navbar-right" role="form" name="LogoutServlet" method="post" action="LogoutServlet">
 					<div class="form-group">
-						<a>Logged in as: Anders</a>
+						<a>Logged in as: <% out.print(session.getAttribute("username")); %></a>
 					</div>
 					<button type="submit" class="btn btn-success">Log out</button>
 				</form>

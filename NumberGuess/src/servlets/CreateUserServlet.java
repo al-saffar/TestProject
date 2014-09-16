@@ -37,7 +37,6 @@ public class CreateUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
 		
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
