@@ -34,10 +34,22 @@ public class SQLTest {
 	public void testSaveUser() {
 		System.out.println("saveUser");
 		
-		User user = new User("Anders", "Al-saffar", "brugernavn", "pw");
+		User user = new User("Anderse", "Als-saffar", "brugernddavn", "pw");
 		
-		boolean expResult = true;
+		boolean expResult = false;
 		boolean result = SQLmapper.saveUser(user);
+		assertEquals(expResult, result);
+	}
+	
+	@Test
+	public void testLoginAndGetID() {
+		System.out.println("Login");
+		
+		String username = "Muhsin";
+		String pass = "pass";
+		
+		int expResult = 1;
+		int result = SQLmapper.loginAndGetID(username, pass);
 		assertEquals(expResult, result);
 	}
 

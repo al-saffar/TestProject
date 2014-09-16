@@ -49,12 +49,12 @@ body {
 				<a class="navbar-brand" href="#">NumberGuess</a>
 			</div>
 			<div class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right" role="form" action="play.jsp">
+				<form class="navbar-form navbar-right" role="form" name="LoginServlet" method="post" action="LoginServlet">
 					<div class="form-group">
-						<input type="text" placeholder="Username" class="form-control">
+						<input type="text" name="username" placeholder="Username" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
+						<input type="password" name="password" placeholder="Password" class="form-control">
 					</div>
 
 					<button type="submit" class="btn btn-success">Log in</button>
@@ -206,8 +206,16 @@ body {
 			document.getElementById("createUser").style.display = "none";
 			document.getElementById("fade").style.display = "none";
 		}
-		function showInfoBox(info)
+		function showInfoBox(err, info)
 		{
+			if(err)
+			{
+				document.getElementById("infoBox").style.color = "red";
+			}
+			else
+			{
+				document.getElementById("infoBox").style.color = "green";
+			}
 			document.getElementById("infoBox").innerHTML = info;
 		}
 		<%out.println((String) session.getAttribute("skrivnoget"));%>
@@ -223,7 +231,7 @@ body {
 				System.out.println("success");
 				%>
 				<script type="text/javascript">
-				window.onload = showInfoBox("<p>User successfully created!</p>")();
+				window.onload = showInfoBox(false,"<p>User successfully created!</p>")();
 				</script>
 				<%
 			}
@@ -232,27 +240,65 @@ body {
 				String errType = "";
 				errType = request.getParameter("err");
 				
-				%>
-				<script type="text/javascript">
-				window.onload = displayPopUp();
-				</script>
-				<%
-				
-				if(errType.equals("user"))
+				if(errType.equals("login") || errType.equals("login-user") || errType.equals("login-length"))
 				{
-					%>
-					<script type="text/javascript">
-					alert("This username is already taken. \nTry another one...");
-					</script>
-					<%
+					if(errType.equals("login"))
+					{
+						%>
+						<script type="text/javascript">
+						window.onload = showInfoBox(true,"<p>You need to login to see this page!</p>")();
+						</script>
+						<%
+					}
+					else if(errType.equals("login-length"))
+					{
+						%>
+						<script type="text/javascript">
+						window.onload = showInfoBox(true,"<p>Please fill all fields!</p>")();
+						</script>
+						<%
+					}
+					else if(errType.equals("login-user"))
+					{
+						%>
+						<script type="text/javascript">
+						window.onload = showInfoBox(true,"<p>Wrong username or password. Please try again.</p>")();
+						</script>
+						<%
+					}
+					else
+					{
+						%>
+						<script type="text/javascript">
+						window.onload = showInfoBox(true,"<p>An Error occured. Please try again</p>")();
+						</script>
+						<%
+					}
 				}
-				else if(errType.equals("length"))
+				else
 				{
 					%>
 					<script type="text/javascript">
-					alert("Please fill all fields. \nFirstname needs to be 2-20 letters.\nLastname needs to be 2-20 letters.\nUsername needs to be 3-20 letters.\nPassword needs to be 6-20 chars.");
+					window.onload = displayPopUp();
 					</script>
 					<%
+					
+					if(errType.equals("user"))
+					{
+						%>
+						<script type="text/javascript">
+						alert("This username is already taken. \nTry another one...");
+						</script>
+						<%
+					}
+					else if(errType.equals("length"))
+					{
+						%>
+						<script type="text/javascript">
+						alert("Please fill all fields. \nFirstname needs to be 2-20 letters.\nLastname needs to be 2-20 letters.\nUsername needs to be 3-20 letters.\nPassword needs to be 6-20 chars.");
+						</script>
+						<%
+					}
 				}
 			}
 			

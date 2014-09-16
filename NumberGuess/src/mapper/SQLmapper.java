@@ -18,8 +18,23 @@ public class SQLmapper {
 		try {
 			DatabaseCon.openConnection();
 			
+			String queryCheck = "SELECT count(*) FROM `okul_guess_users` WHERE `username` = ?";
+			PreparedStatement query = DatabaseCon.getStatement(queryCheck);
+			query.setString(1, user.getUsername());
+			
+			ResultSet result = query.executeQuery();
+			
+			if(result.next()) {
+			    final int count = result.getInt(1);
+			    if(count > 0)
+			    {
+			    	DatabaseCon.closeConnection();
+			    	return false;
+			    }
+			}
+			
 			String sqlStr = "INSERT INTO `okul_guess_users`(`firstname`, `lastname`, `username`, `score`) VALUES (?,?,?,?)";
-			PreparedStatement query = DatabaseCon.getStatement(sqlStr);
+			query = DatabaseCon.getStatement(sqlStr);
 			
 			query.setString(1, user.getFirstname());
 			query.setString(2, user.getLastname());
@@ -80,6 +95,85 @@ public class SQLmapper {
 			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null, ex);
 			return true;
 		}
+	}
+	
+	public static int loginAndGetID(String username, String pass)
+	{
+		try {
+			DatabaseCon.openConnection();
+			
+			String queryCheck = "SELECT `userID` FROM `okul_guess_users` WHERE `username` = ?";
+			PreparedStatement query = DatabaseCon.getStatement(queryCheck);
+			query.setString(1, username);
+			
+			ResultSet result = query.executeQuery();
+			
+			if(result.next()) {
+			    final int id = result.getInt("userID");
+			    if(id != -1)
+			    {
+			    	queryCheck = "SELECT count(*) FROM `okul_guess_passwords` WHERE `userID` = ? AND `value` = ?";
+					query = DatabaseCon.getStatement(queryCheck);
+					query.setInt(1, id);
+					query.setString(2, pass);
+					result = query.executeQuery();
+			    	
+					if(result.next()) {
+					    final int count = result.getInt(1);
+					    if(count > 0)
+					    {
+					    	DatabaseCon.closeConnection();
+					    	return id;
+					    }
+					    else
+					    {
+					    	DatabaseCon.closeConnection();
+					    	return -1;
+					    }
+					}
+			    }
+			    else
+			    {
+			    	DatabaseCon.closeConnection();
+			    	return -1;
+			    }
+			}
+			else
+			{
+				DatabaseCon.closeConnection();
+				return -1;
+			}
+		} catch (Exception ex) {
+			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null, ex);
+			return -1;
+		}
+		return -1;
+	}
+	
+	public static String getUsername(int userID)
+	{
+		String username = "";
+		
+		try {
+			DatabaseCon.openConnection();
+			
+			String sqlStr = "SELECT `username` FROM `okul_guess_users` WHERE `userID` = ?";
+			PreparedStatement query = DatabaseCon.getStatement(sqlStr);
+			query.setInt(1, userID);
+			
+			ResultSet result = query.executeQuery();
+			
+			if(result.next()) {
+			    username = result.getString("username");
+			    
+			}
+			
+			DatabaseCon.closeConnection();
+		} catch (Exception ex) {
+			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+		return username;
 	}
 	
 	public static Score[] gethighscore()
