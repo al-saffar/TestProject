@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mapper.SQLmapper;
+
 /**
  * Servlet implementation class StartGameServlet
  */
@@ -45,7 +47,7 @@ public class StartGameServlet extends HttpServlet {
 		session.setAttribute("selLevel", level);
 		System.out.println("TEST!!! "+session.getAttribute("randomNumb"));
 		
-		
+		session.setAttribute("totalHighscore", SQLmapper.getCurrentScoreByUser((String)session.getAttribute("username")));
 		response.sendRedirect("play.jsp");
 
 	}
