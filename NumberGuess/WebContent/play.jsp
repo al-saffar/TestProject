@@ -1,3 +1,8 @@
+<%@page import="mapper.SQLmapper"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="mapper.SQLmapper"%>
+<%@page import="classes.Score"%>
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="ISO-8859-1"%>
 
@@ -142,12 +147,14 @@ body {
 					id="guessedNumb" class="form-control" maxlength="3" minlenght="1"
 					onkeypress=checkNumb(this.value); onclick="this.select()">
 			</div>
-
+			<div id="msg"></div>
+		
+		</div>
+		<br>
+		<div id="guessBtn">
 			<button type="button" onclick=checkNumb(this.value);
 				class="btn btn-success">Guess!</button>
 		</div>
-		<div id="msg"></div>
-
 	</div>
 
 
@@ -158,33 +165,34 @@ body {
 		<!-- Example row of columns -->
 		<div class="row">
 			<div class="col-md-4">
-				<h2>1.</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce
-					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-					magna mollis euismod. Donec sed odio dui.</p>
+				<h2>1.Place</h2>
+				<p>
+				<%Score[] scores = SQLmapper.gethighscore(); 
+				
+					out.print("<h2>"+scores[0].getUsername()+" - "+scores[0].getScore()+" Points </h2>");
+				
+				%>
+				</p>
 				<p>
 					<a class="btn btn-default" href="#" role="button">View details
 						&raquo;</a>
 				</p>
 			</div>
 			<div class="col-md-4">
-				<h2>2.</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce
-					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-					.</p>
+				<h2>2.Place</h2>
+				<% 
+				out.print("<h2>"+scores[1].getUsername()+" - "+scores[1].getScore()+" Points </h2>");
+				%>
 				<p>
 					<a class="btn btn-default" href="#" role="button">View details
 						&raquo;</a>
 				</p>
 			</div>
 			<div class="col-md-4">
-				<h2>3.</h2>
-				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
-					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-					.</p>
+				<h2>3.Place</h2>
+				<% 
+				out.print("<h2>"+scores[2].getUsername()+" - "+scores[2].getScore()+" Points </h2>");
+				%>
 				<p>
 					<a class="btn btn-default" href="#" role="button">View details
 						&raquo;</a>
@@ -293,7 +301,7 @@ body {
 			
 			else if (selval == randomNumb){
 				checkNumb.counter++;
-				document.getElementById("msg").innerHTML="Correct Attemps: "+ checkNumb.counter;
+				document.getElementById("msg").innerHTML="<h3> Correct!  Attemps: "+ checkNumb.counter+"</h3>";
 				
 				// send til servlet/database her
 				var elem = document.getElementById("hiddenField")
@@ -321,14 +329,14 @@ body {
 			}
 			else if(selval < randomNumb){
 				checkNumb.counter++;
-				document.getElementById("msg").innerHTML="Too Small Attemps: "+ checkNumb.counter;
+				document.getElementById("msg").innerHTML="<h3> Too Small Attemps: "+ checkNumb.counter+"</h3>";
 				document.getElementById("guessedNumb").focus();
 				document.getElementById("guessedNumb").select();
 				
 			}
 			else if(selval > randomNumb){
 				checkNumb.counter++;
-				document.getElementById("msg").innerHTML="Too High Attemps: "+ checkNumb.counter;
+				document.getElementById("msg").innerHTML="<h3> Too High Attemps: "+ checkNumb.counter+"</h3>";
 				document.getElementById("guessedNumb").focus();
 				document.getElementById("guessedNumb").select();
 				
