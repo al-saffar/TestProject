@@ -202,7 +202,7 @@ public class SQLmapper {
 	}
 
 	public static int getCurrentScoreByUser(String username) {
-		int score = 0;
+		int score = -1;
 
 		try {
 			DatabaseCon.openConnection();
@@ -220,6 +220,7 @@ public class SQLmapper {
 			System.out.println("score "+score);
 
 			DatabaseCon.closeConnection();
+			
 		} catch (Exception ex) {
 			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null,
 					ex);
