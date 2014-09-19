@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mapper.SQLmapper;
-import classes.User;
 
 /**
- * Servlet implementation class EditUserServlet
+ * Servlet implementation class DeleteUserServlet
  */
-@WebServlet("/EditUserServlet")
-public class EditUserServlet extends HttpServlet {
+@WebServlet("/DeleteUserServlet")
+public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditUserServlet() {
+    public DeleteUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,33 +38,27 @@ public class EditUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		
-		String firstname = ""; firstname = request.getParameter("firstname");
-		String lastname = ""; lastname = request.getParameter("lastname");
-		String username = ""; username = (String)session.getAttribute("username");
-		String password = ""; password = request.getParameter("pw");
-		
-		if(firstname.isEmpty() || lastname.isEmpty())
+		if(request.getParameter("btnDelete").equals("true"))
 		{
-			response.sendRedirect("profile.jsp?update_success=false");
-		}
-		else
-		{
-			User user = new User(firstname, lastname,username, password);
+			HttpSession session = request.getSession();
+			int id = (int)session.getAttribute("userid");
 			
-			boolean success = false;
-			int id = (int) session.getAttribute("userid");
-			success = SQLmapper.updateUser(id, user);
+			boolean success = SQLmapper.deleteUser(id);
 			
 			if(success)
 			{
-				response.sendRedirect("profile.jsp?update_success=true");
+				session.invalidate();
+				response.sendRedirect("index.jsp");
 			}
 			else
 			{
 				response.sendRedirect("profile.jsp?update_success=false");
 			}
-		}	
+		}
+		else
+		{
+			response.sendRedirect("profile.jsp");
+		}
 	}
+
 }

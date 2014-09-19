@@ -1,6 +1,4 @@
-/classes/
-/controller/
-/database/
 /mapper/
 /servlets/
 /unitTest/
+/classes/

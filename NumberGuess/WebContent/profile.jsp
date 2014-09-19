@@ -1,3 +1,4 @@
+<%@page import="classes.User"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="mapper.SQLmapper"%>
@@ -19,6 +20,11 @@ if(id < 0)
 {
 	response.sendRedirect("index.jsp?success=false&err=login");
 }
+
+User user = new User();
+
+user = SQLmapper.getUserInfo(id);
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -90,13 +96,13 @@ body {
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron">
 		<div class="container">
-
+			<div id="infoBox" style="color:green;"></div>
 			<h1>Profile</h1>
 			<br>
 			
 			<div style="display:250px:table-cell;">
-			<p style="width:50%;display:table-cell;">#USERNAME HERE#</p>
-			<p style="width:50%;display:table-cell;">Score: #SCORE HERE#</p>
+			<p style="width:50%;display:table-cell;"><% out.print(session.getAttribute("username")); %></p>
+			<p style="width:50%;display:table-cell;">Score: <% out.print(SQLmapper.getCurrentScoreByUser((String)session.getAttribute("username"))); %></p>
 			</div>
 
 			<br>
@@ -108,7 +114,7 @@ body {
 			</tr>
 			
 			<tr>
-			<td><input class="form-control" type="text" name="firstname" placeholder="Type firstname" value="#FIRSTNAME FROM DB#"></td>
+			<td><input class="form-control" type="text" name="firstname" placeholder="Type firstname" value="<% out.print(user.getFirstname()); %>"></td>
 			<td><input class="form-control" type="password" name="pw" placeholder="Type password"></td>
 			</tr>
 			
@@ -117,7 +123,7 @@ body {
 			</tr>
 			
 			<tr>
-			<td><input class="form-control" type="text" name="lastname" placeholder="Type lastname" value="#LASTNAME FROM DB#"></td>
+			<td><input class="form-control" type="text" name="lastname" placeholder="Type lastname" value="<% out.print(user.getLastname()); %>"></td>
 			</tr>
 			</table>
 			
@@ -128,13 +134,11 @@ body {
 			<div style="width:inherit;display:table-cell;">
 			<input class="btn btn-success" type="submit" name="btnSave" value="Save Changes">
 			</div>
-			<div style="width:inherit;display:table-cell;text-align:right;">
-			<input class="btn btn-danger" type="submit" name="btnDelete" value="Delete Account">
-			</div>
-		
-			</div>
-			
 			</form>
+			<div style="width:inherit;display:table-cell;text-align:right;">
+			<form name="DeleteUserServlet" action="DeleteUserServlet" method="post"><input class="btn btn-danger" onclick="deleteUser()" type="submit" name="btnDelete" value="Delete Account"></form> 
+			</div>
+			</div>
 			
 			<br> <br>
 		</div>
@@ -266,8 +270,58 @@ body {
 		function showVal(newVal){
 			  document.getElementById("showLevelValue").innerHTML=newVal;
 		}
+		function showInfoBox(err, info)
+		{
+			if(err)
+			{
+				document.getElementById("infoBox").style.color = "red";
+			}
+			else
+			{
+				document.getElementById("infoBox").style.color = "green";
+			}
+			document.getElementById("infoBox").innerHTML = info;
+		}
+		
+		function deleteUser()
+		{
+			var r = confirm("Are your sure?");
+			if (r == true) {
+				document.DeleteUserServlet.btnDelete.value="true";
+			} else {
+				document.DeleteUserServlet.btnDelete.value="false";;
+			}
+		}
 	</script>
-
+	<%
+	try{
+		String success = "";
+		success = request.getParameter("update_success");
+		if(success.equals("true"))
+		{
+			System.out.println("success");
+			%>
+			<script type="text/javascript">
+			window.onload = showInfoBox(false,"<p>User successfully Updated!</p>")();
+			</script>
+			<%
+		}
+		else if(success.equals("false"))
+		{
+			System.out.println("fail");
+			%>
+			<script type="text/javascript">
+			window.onload = showInfoBox(true,"<p>An error occured!, please try again</p>")();
+			</script>
+			<%
+		}
+	}
+	catch(Exception ex)
+	{
+		
+	}
+	
+	%>
 
 </body>
 </html>

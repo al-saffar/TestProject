@@ -200,6 +200,35 @@ public class SQLmapper {
 
 		return scores;
 	}
+	
+	public static User getUserInfo(int id)
+	{
+		User user = new User();
+		
+		try {
+			DatabaseCon.openConnection();
+
+			String sqlStr = "SELECT `firstname`,`lastname`,`username` FROM `okul_guess_users` Where userID = ?";
+			PreparedStatement query = DatabaseCon.getStatement(sqlStr);
+			query.setInt(1, id);
+			ResultSet result = query.executeQuery();
+
+			while (result.next()) {
+
+				user.setFirstname(result.getString("firstname"));
+				user.setLastname(result.getString("lastname"));
+				user.setUsername(result.getString("username"));
+			}
+
+			DatabaseCon.closeConnection();
+			
+		} catch (Exception ex) {
+			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null,
+					ex);
+		}
+		
+		return user;
+	}
 
 	public static int getCurrentScoreByUser(String username) {
 		int score = -1;
@@ -250,5 +279,64 @@ public class SQLmapper {
 			return false;
 		}
 	}
+	
+	public static boolean updateUser(int id, User user)
+	{
+		try {
+			DatabaseCon.openConnection();
 
+			String sqlStr = "UPDATE `okul_guess_users` SET `firstname` = ?, `lastname` = ? WHERE `userID` = ?";
+			PreparedStatement query = DatabaseCon.getStatement(sqlStr);
+			
+			query.setString(1, user.getFirstname());
+			query.setString(2,user.getLastname());
+			query.setInt(3, id);
+
+			query.executeUpdate();
+			
+			if(!user.getPassword().isEmpty())
+			{
+				sqlStr = "UPDATE `okul_guess_passwords` SET `value` = ? WHERE `userID` = ?";
+				query = DatabaseCon.getStatement(sqlStr);
+				
+				query.setString(1, user.getPassword());
+				query.setInt(2, id);
+
+				query.executeUpdate();
+			}
+			
+			DatabaseCon.closeConnection();
+			return true;
+		} catch (Exception ex) {
+			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null,
+					ex);
+			return false;
+		}
+	}
+
+	public static boolean deleteUser(int id)
+	{
+		try {
+			DatabaseCon.openConnection();
+
+			String sqlStr = "DELETE FROM `okul_guess_passwords` WHERE `userID` = ?";
+			PreparedStatement query = DatabaseCon.getStatement(sqlStr);
+			query.setInt(1, id);
+
+			query.executeUpdate();
+			
+			sqlStr = "DELETE FROM `okul_guess_users` WHERE `userID` = ?";
+			query = DatabaseCon.getStatement(sqlStr);
+			query.setInt(1, id);
+
+			query.executeUpdate();
+			
+			DatabaseCon.closeConnection();
+			return true;
+		} catch (Exception ex) {
+			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null,
+					ex);
+			return false;
+		}
+	}
 }
