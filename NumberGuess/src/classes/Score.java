@@ -4,6 +4,10 @@ public class Score {
 	private String username;
 	private int score;
 	
+	public Score(){
+		
+	}
+	
 	public Score(String username, int score) {
 		super();
 		this.username = username;

@@ -30,7 +30,7 @@ public class SQLTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	@Test 
 	public void testSaveUser() {
 		System.out.println("saveUser");
 		

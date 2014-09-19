@@ -19,11 +19,19 @@ import classes.User;
  */
 public class UserTest {
 
+	private static User user;
 	/**
-	 * @throws java.lang.Exception
+	   @BeforeClass executes before the start of tests. 
+		This can be used to perform time intensive activities, 
+		e.g., connect to a database. @AfterClass executes after all tests have finished. 
+		This can be used to perform clean-up activities, e.g., disconnect from a database. 
+		Those two only run one time no matter how many test the class has. 
+		Also you have to declare “@BeforeClass” and “@AfterClass” method as static method.
+		The two annotations should be used do some static initialization code and destroy static variables.
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		user = new User();
 	}
 
 	/**
@@ -34,10 +42,17 @@ public class UserTest {
 	}
 
 	/**
-	 * @throws java.lang.Exception
+	  @Before and @After Will execute the method before/after each test. This
+	   method can prepare/clean up the test environment (e.g. read input
+	   data, initialize the class, delete temporary data, etc). As a
+	   class can have multiple test methods,
+	   @Before and @After methods will be executed before and after each test.
+	   This is different with @BeforeClass and @AfterClass.
 	 */
 	@Before
 	public void setUp() throws Exception {
+		System.out.println("setUser");
+		
 	}
 
 	/**
@@ -47,7 +62,7 @@ public class UserTest {
 	public void tearDown() throws Exception {
 	}
 
-	User user;
+	
 
 	/**
 	 * Test method for {@link classes.User#getFirstname()}.
@@ -67,21 +82,21 @@ public class UserTest {
 	 */
 	@Test
 	public void testSetFirstname() {
+
 		
-		System.out.println("setUser");
-		//new test that should return true, because firstname => 2 
+		// new test that should return true, because firstname => 2
 		String _firstname = "Anders";
-		user = new User();
+		
 		boolean expResult = true;
 		boolean result = user.setFirstname(_firstname);
 		assertEquals(expResult, result);
-		
-		//new test that should return false, because firstname < 2 
-		_firstname ="A";
+
+		// new test that should return false, because firstname < 2
+		_firstname = "A";
 		boolean expResult1 = false;
 		boolean result1 = user.setFirstname(_firstname);
 		assertEquals(expResult1, result1);
-						
+
 	}
 
 }

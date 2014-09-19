@@ -77,16 +77,23 @@
 
 #msg {
 	margin-top: auto;
-	margin-left: 25%;
-	margin-right: 75%;
-	width: 100px;
+	margin-left: 15%;
+	margin-right: 85%;
+	width: 185px;
 	height: 10px;
+	
 }
 
 #guessedNumb {
 	font-size: 30px;
 	height: 70px;
 	width: 100px;
+	float: left;
+}
+
+#guessBtn{
+	margin-left: 13%;
+	margin-right: 87%;
 }
 
 input[type='range'] {

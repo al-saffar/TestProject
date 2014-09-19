@@ -1,14 +1,14 @@
 package unitTest;
 
-import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import database.DatabaseCon;
 
-public class GameTest {
+public class DatabaseTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -16,18 +16,24 @@ public class GameTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		
+		DatabaseCon.closeConnection();
 	}
 
 	@Before
 	public void setUp() throws Exception {
+		System.out.println("setUp - OpenConnectionTest");
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		System.out.println("tearDown - OpenConnectionTest");
 	}
-
-	@Test
-	public void Gametest() {
+	
+	@Test(timeout = 2000)
+	public void DatabaseConnectionTest() {
+		//average 1500 ms
+		DatabaseCon.openConnection();
 		
 	}
 

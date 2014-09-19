@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mapper.SQLmapper;
+
 /**
  * Servlet implementation class GameEndedServlet
  */
@@ -32,7 +34,13 @@ public class GameEndedServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		String score = request.getParameter("hiddenScore");
+		String score = (request.getParameter("hiddenScore"));
+		if(request.getParameter("hiddenScore").contains(".")){
+			
+			score = score.substring(0, score.indexOf("."));
+			
+		}
+		int scoreAsInt = Integer.parseInt(score);
 		int attemps = Integer.parseInt(request.getParameter("hiddenField"));
 		System.out.println("Forsøg: " + attemps);
 		
@@ -45,6 +53,10 @@ public class GameEndedServlet extends HttpServlet {
 		System.out.println("Score = " + score);
 		session.setAttribute("score", score);
 		session.setAttribute("randomNumb", null);
+		int currentScore = scoreAsInt;
+		int highScore = (Integer)session.getAttribute("totalHighscore");
+		int totalHighscore = highScore += currentScore;
+		SQLmapper.updateScore(totalHighscore, (String)session.getAttribute("username"));
 		
 		response.sendRedirect("play.jsp");
 
