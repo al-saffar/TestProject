@@ -27,6 +27,7 @@ public class SQLmapper {
 				final int count = result.getInt(1);
 				if (count > 0) {
 					DatabaseCon.closeConnection();
+					System.out.println("username is taken!");
 					return false;
 				}
 			}
@@ -332,6 +333,7 @@ public class SQLmapper {
 			query.executeUpdate();
 			
 			DatabaseCon.closeConnection();
+			System.out.println("User Deleted: "+ id);
 			return true;
 		} catch (Exception ex) {
 			Logger.getLogger(SQLmapper.class.getName()).log(Level.SEVERE, null,
