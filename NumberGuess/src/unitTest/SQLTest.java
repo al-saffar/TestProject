@@ -24,7 +24,7 @@ public class SQLTest {
 	}
 	
 	User userTest = new User();
-	User userExp =  new User();
+	
 	
 	@Before
 	public void setUp() throws Exception {
