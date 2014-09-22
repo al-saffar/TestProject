@@ -15,20 +15,21 @@ import database.DatabaseCon;
 
 public class SQLTest {
 
+	
+	private User userTest;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
+		System.out.println("Starting junit method..");
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 	
-	User userTest = new User();
 	
 	
 	@Before
 	public void setUp() throws Exception {
-		
+     userTest = new User();
 	
 	 userTest.setFirstname("Andere");
 	 userTest.setLastname("Alssafar");
@@ -38,9 +39,6 @@ public class SQLTest {
 	
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
 	public void testUser_insert_login_delete() {
@@ -81,7 +79,17 @@ public class SQLTest {
 			
 		}
 	}
+	
+	@After
+	public void tearDown() throws Exception {
+		userTest = null;
+	}
 
+	
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		System.out.println("Closing junit method..");
+	}
 //	@Test
 //	public void testLoginAndGetID() {
 //		System.out.println("Login");

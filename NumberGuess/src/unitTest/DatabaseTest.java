@@ -30,9 +30,9 @@ public class DatabaseTest {
 		System.out.println("tearDown - OpenConnectionTest");
 	}
 	
-	@Test(timeout = 2000)
+	@Test(timeout = 1000)
 	public void DatabaseConnectionTest() {
-		//average 1500 ms
+		//average 1000 ms
 		DatabaseCon.openConnection();
 		
 	}
