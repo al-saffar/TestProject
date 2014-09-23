@@ -14,7 +14,6 @@ public class AllTests extends TestCase {
 	
 	public static Test suite() {   
 		  TestSuite suite = new TestSuite("Test for test");     
-		      
 		   suite.addTestSuite(DatabaseTest.class);
 		   suite.addTestSuite(GameTest.class);
 		   suite.addTestSuite(SQLTest.class);
@@ -22,8 +21,3 @@ public class AllTests extends TestCase {
 		  return suite;   
 		 }
 	}
-
-
-
-
-

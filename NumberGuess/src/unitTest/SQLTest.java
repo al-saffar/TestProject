@@ -14,7 +14,7 @@ import org.junit.internal.runners.statements.Fail;
 import classes.User;
 import database.DatabaseCon;
 
-public class SQLTest extends TestCase{
+public class SQLTest extends TestCase {
 
 	
 	private User userTest;
@@ -26,8 +26,6 @@ public class SQLTest extends TestCase{
 	}
 
 	
-	
-	
 	@Before
 	public void setUp() throws Exception {
      userTest = new User();
@@ -37,7 +35,6 @@ public class SQLTest extends TestCase{
 	 userTest.setUsername("testtest");
 	 userTest.setPassword("123456");
 	 
-	
 	}
 
 
@@ -91,16 +88,6 @@ public class SQLTest extends TestCase{
 	public static void tearDownAfterClass() throws Exception {
 		System.out.println("Closing junit method..");
 	}
-//	@Test
-//	public void testLoginAndGetID() {
-//		System.out.println("Login");
-//
-//		String username = "Muhsin";
-//		String pass = "pass";
-//
-//		int expResult = 1;
-//		int result = SQLmapper.loginAndGetID(username, pass);
-//		assertEquals(expResult, result);
-//	}
+
 
 }
