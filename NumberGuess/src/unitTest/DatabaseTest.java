@@ -1,14 +1,17 @@
 package unitTest;
 
 
+import junit.framework.TestCase;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import database.DatabaseCon;
 
-public class DatabaseTest {
+public class DatabaseTest extends TestCase {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

@@ -2,13 +2,15 @@ package unitTest;
 
 
 
+import junit.framework.TestCase;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class GameTest {
+public class GameTest extends TestCase {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

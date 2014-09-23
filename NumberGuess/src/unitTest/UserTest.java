@@ -4,6 +4,7 @@
 package unitTest;
 
 import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,7 +18,7 @@ import classes.User;
  * @author Anders Al-saffar
  *
  */
-public class UserTest {
+public class UserTest extends TestCase {
 
 	private static User user;
 	/**

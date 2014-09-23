@@ -1,6 +1,7 @@
 package unitTest;
 
 import static org.junit.Assert.*;
+import junit.framework.TestCase;
 import mapper.SQLmapper;
 
 import org.junit.After;
@@ -13,7 +14,7 @@ import org.junit.internal.runners.statements.Fail;
 import classes.User;
 import database.DatabaseCon;
 
-public class SQLTest {
+public class SQLTest extends TestCase{
 
 	
 	private User userTest;
