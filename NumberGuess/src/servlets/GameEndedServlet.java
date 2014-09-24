@@ -23,7 +23,6 @@ public class GameEndedServlet extends HttpServlet {
 	 */
 	public GameEndedServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

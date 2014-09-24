@@ -1,6 +1,5 @@
 package unitTest;
 
-import static org.junit.Assert.*;
 import junit.framework.TestCase;
 import mapper.SQLmapper;
 
@@ -9,10 +8,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
 
 import classes.User;
-import database.DatabaseCon;
 
 public class SQLTest extends TestCase {
 
@@ -50,7 +47,6 @@ public class SQLTest extends TestCase {
 			Thread.sleep(4000);
 			System.out.println("user saved: "+ userTest.getUsername());
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -67,7 +63,6 @@ public class SQLTest extends TestCase {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			boolean expResult3 = true;

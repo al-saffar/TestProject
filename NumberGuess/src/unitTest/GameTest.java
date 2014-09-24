@@ -1,16 +1,13 @@
 package unitTest;
 
 
-import static org.junit.Assert.*;
 import junit.framework.TestCase;
-import mapper.SQLmapper;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
 
 
 public class GameTest extends TestCase {

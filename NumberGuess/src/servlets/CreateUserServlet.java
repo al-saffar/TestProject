@@ -7,13 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.apache.jasper.tagplugins.jstl.core.Out;
 
 import mapper.SQLmapper;
 import classes.User;
-import database.DatabaseCon;
 
 /**
  * Servlet implementation class CreateUserServlet
@@ -27,7 +24,6 @@ public class CreateUserServlet extends HttpServlet {
 	 */
 	public CreateUserServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
