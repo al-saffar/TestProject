@@ -55,7 +55,7 @@ public class GameTest extends TestCase {
 	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		System.out.println("gameTest end");
+		System.out.println("gameTest end..");
 	}
 
 }
