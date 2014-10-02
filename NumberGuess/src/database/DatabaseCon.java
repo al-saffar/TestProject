@@ -20,7 +20,7 @@ public class DatabaseCon {
 			String connectionUrl = "jdbc:mysql://mysql22.unoeuro.com/karanlikvadigames_com_db?"
 					+ "user=karanlikva_com&password=04640464&autoReconnect=true";
 			connect = DriverManager.getConnection(connectionUrl);
-			System.out.println("++++++++++Connection established!++++++++++");
+			System.out.println("+++++++++Connection established!+++++++++");
 
 		} catch (SQLException e) {
 			System.out.println("SQL Exception: " + e.toString());
