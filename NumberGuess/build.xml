@@ -17,6 +17,7 @@
 			<classpath refid="compile.classpath"/>
 			<classpath>  
 			 <pathelement location="C:/Program Files/apache-tomcat-8.0.11/lib/servlet-api.jar" />  
+			 <pathelement location="C:/Program Files/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar" />
 			 </classpath>  
 		</javac>
 	</target>
