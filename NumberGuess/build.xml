@@ -13,8 +13,11 @@
 	</target>
 	
 	<target name="compile" depends="init" >
-		<javac destdir="build/classes" debug="true" srcdir="src">
+		<javac includeantruntime="false" destdir="build/classes" debug="true" srcdir="src">
 			<classpath refid="compile.classpath"/>
+			<classpath>  
+			 <pathelement location="C:/Program Files/apache-tomcat-8.0.11/lib/servlet-api.jar" />  
+			 </classpath>  
 		</javac>
 	</target>
 	
