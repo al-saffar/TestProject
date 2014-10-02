@@ -23,8 +23,6 @@ public class StartGameServlet extends HttpServlet {
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public StartGameServlet() {
-
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
