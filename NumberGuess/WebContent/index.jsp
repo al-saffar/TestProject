@@ -237,7 +237,7 @@ body {
 			}
 			else
 			{
-				String errType = "";
+				String errType = "err";
 				errType = request.getParameter("err");
 				
 				if(errType.equals("login") || errType.equals("login-user") || errType.equals("login-length"))
