@@ -41,7 +41,7 @@ public class GameEndedServlet extends HttpServlet {
 		}
 		int scoreAsInt = Integer.parseInt(score);
 		int attemps = Integer.parseInt(request.getParameter("hiddenField"));
-		System.out.println("Forsøg: " + attemps);
+		System.out.println("attmps: " + attemps);
 		
 		// int randomNumb = Integer.parseInt((String)
 		// session.getAttribute("randomNumb"));

@@ -32,7 +32,7 @@ public class UserTest extends TestCase {
 	 *              finished. This can be used to perform clean-up activities,
 	 *              e.g., disconnect from a database. Those two only run one
 	 *              time no matter how many test the class has. Also you have to
-	 *              declare “@BeforeClass” and “@AfterClass” method as static
+	 *              declare "@BeforeClass" and "@AfterClass" method as static
 	 *              method. The two annotations should be used do some static
 	 *              initialization code and destroy static variables.
 	 */
