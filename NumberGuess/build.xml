@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="NumberGuess" default="war">
+<project name="NumberGuess" default="clean">
+
 
 	<path id="compile.classpath">
 		<fileset dir="WebContent/WEB-INF/lib">
@@ -18,6 +19,7 @@
 			<classpath>
 				<pathelement location="C:/Program Files/apache-tomcat-8.0.11/lib/servlet-api.jar" />
 				<pathelement location="C:/Program Files/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar" />
+				<pathelement location="build/classes" />
 			</classpath>
 		</javac>
 	</target>
@@ -29,9 +31,10 @@
 			<classes dir="build/classes" />
 		</war>
 	</target>
-	
-	<target name="build-test" >
-	    <javac includes="C:/Program Files/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar" includeantruntime="false" srcdir="src/unitTest" destdir="src/unitTest/" classpathref="compile.classpath" />
+
+	<target name="build-test" depends="war">
+		<javac includes="C:/Program Files/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar" includeantruntime="false" srcdir="src/unitTest" destdir="src/unitTest/" classpathref="compile.classpath" />
+		
 	</target>
 
 
@@ -40,20 +43,18 @@
 			<formatter type="xml" usefile="true" />
 			<classpath>
 				<pathelement location="C:/Program Files/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar" />
-				<pathelement location="build/classes" /> 
-				</classpath>
+				<pathelement location="build/classes" />
+			</classpath>
 			<classpath refid="compile.classpath" />
 			<test name="unitTest.AllTests" />
 		</junit>
 	</target>
 
-
-	<target name="clean">
+	<target name="clean" depends="run_tests">
 		<delete dir="dist" />
 		<delete dir="build" />
+		<delete file="TEST-unitTest.AllTests.xml" />
 	</target>
-
-
 
 </project>
 
