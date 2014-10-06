@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="NumberGuess" default="clean">
+<project name="NumberGuess" default="run_tests">
 
 
 	<path id="compile.classpath">
@@ -7,8 +7,14 @@
 			<include name="*.jar" />
 		</fileset>
 	</path>
+	
+	<target name="clean">
+			<delete dir="dist" />
+			<delete dir="build" />
+			<delete file="TEST-unitTest.AllTests.xml" />
+		</target>
 
-	<target name="init">
+	<target name="init" depends ="clean">
 		<mkdir dir="build/classes" />
 		<mkdir dir="dist" />
 	</target>
@@ -50,11 +56,7 @@
 		</junit>
 	</target>
 
-	<target name="clean" depends="run_tests">
-		<delete dir="dist" />
-		<delete dir="build" />
-		<delete file="TEST-unitTest.AllTests.xml" />
-	</target>
+	
 
 </project>
 
